@@ -270,7 +270,8 @@ export const dispatchChatCompletion = async (props: ChatProps): Promise<ChatResp
   const AIMessages: ChatCompletionMessageParam[] = [
     {
       role: ChatCompletionRequestMessageRoleEnum.Assistant,
-      content: answerText
+      content: answerText,
+      reasoning_text: reasoningText // reasoning_text is only recorded for response, but not for request
     }
   ];
 
@@ -407,7 +408,7 @@ async function getMultiInput({
 
   return {
     documentQuoteText: text,
-    userFiles: fileLinks.map((url) => parseUrlToFileType(url))
+    userFiles: fileLinks.map((url) => parseUrlToFileType(url)).filter(Boolean)
   };
 }
 
